@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<meta charset="ISO-8859-1">
+<html>
+<head>
+
+    <tile>Ice Cream Project</tile>
+    <style>
+        body {
+            background-color:powderblue;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h2 style="color:darkgreen;"> Bearcat Ice Cream Order.</h2>
+
+<fieldset style="width:500px">
+    <legend>Flavor</legend>
+    <ol>
+        <select name="Flavours" id="flavours">
+            <option value="Chocolate">Chocolate</option>
+            <option value="Mint Chocolate Chip">Mint Chocolate Chip</option>
+            <option value="Strawberry">Strawberry</option>
+            <option value="Vanilla">Vanilla</option>
+        </select>
+    </ol>
+</fieldset>
+
+<fieldset style="width:500px">
+    <legend>Size</legend>
+    <ul class="radio">
+        <li><input type="radio" name="size" id="size1" value="Small" /><label for="size1"required>Small</label></li>
+        <li><input type="radio" name="size" id="size2" value="Medium" /><label for="size2"required>Medium</label></li>
+        <li><input type="radio" name="size" id="size3" value="Large" /><label for="size3"required>Large</label></li>
+    </ul>
+</fieldset>
+
+
+<fieldset style="width:500px">
+    <legend>Quantity</legend>
+    <label for="Quantity">Quantity *</label>
+    <input id="Quantity" name="Quantity" type="number" min="01" max="10" maxlength="2" required />
+    <p class="validation01">
+    </p>
+</fieldset>
+
+<fieldset style="width:500px">
+    <legend> Extra topping </legend>
+    <input type="checkbox" name="topping" value="salted caramel">Salted Caramel<br>
+    <input type="checkbox" name="topping" value="sugar free strawberry">Sugar Free Strawberry<br>
+</fieldset>
+
+<input type="button" id="button" value="Order" onclick="totalCost()"/>
+
+<br>
+<p id="order"></p>
+<p id="time"></p>
+<script>
+
+    function totalCost(){
+
+        var x = 1.00;
+
+        var flavour = document.getElementById("flavours").value;
+
+        if(flavour == "Chocolate"){
+
+            x = 1.00;
+
+        } else if(flavour == "Mint_Chocolate_Chip"){
+
+            x = 1.25;
+
+        }else if(flavour == "strawberry"){
+
+            x = 1.50;
+
+        }else if(flavour == "Vanilla"){
+
+            x = 1.50;
+        }
+
+
+        if(document.getElementById("size1").checked){
+
+            var radio = document.getElementById("size1").value;
+
+            document.getElementById("size1").checked = false;
+
+        }else if(document.getElementById("size2").checked){
+
+            var radio = document.getElementById("size2").value;
+
+            document.getElementById("size2").checked = false;
+
+        }else if(document.getElementById("size3").checked){
+
+            var radio = document.getElementById("size3").value;
+
+            document.getElementById("size3").checked = false;
+        }
+
+        var y = 0.00;
+
+        if(radio === "Small"){
+
+            y = 6.00;
+
+        }else if(radio === "Medium"){
+
+            y = 9.00;
+
+        }else if(radio === "Large"){
+
+            y = 11.00;
+        }
+
+
+        var quantity = document.getElementById("Quantity").value;
+
+        var checks = document.getElementsByName('topping');
+
+        var str="";
+
+        var val=1.00;
+
+        for(i=0;i<2;i++) {
+
+            if(checks[i].checked){
+
+                str += checks[i].value + " ";
+            }
+        }
+
+        if(str === "salted caramel "){
+
+
+            val = 1.70;
+
+        }else if(str === "sugar free strawberry "){
+
+
+            val = 1.50;
+
+        }else if(str === "salted caramel sugar free strawbeery "){
+
+
+            val=1.10;
+
+        }
+
+
+        var msg = (quantity * (y + x + val));
+
+
+        document.getElementById("order").innerHTML="The total cost is $"+msg;
+
+        document.getElementById("time").innerHTML="Your order will be delivered in about "+Math.floor((Math.random()*20) + 25)+" minutes";
+
+
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
